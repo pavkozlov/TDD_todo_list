@@ -8,6 +8,10 @@ def home_page(requests):
     '''домашняя страница'''
     if requests.method == 'POST':
         Item.objects.create(text=requests.POST['item_text'])
-        return redirect('/')
+        return redirect('/lists/first_list_on_the_world/')
+    return render(requests, 'home.html')
+
+
+def view_list(requests):
     items = Item.objects.all()
-    return render(requests, 'home.html', {'items': items})
+    return render(requests, 'list.html', {'items': items})
