@@ -2,9 +2,9 @@ from selenium import webdriver
 import unittest
 from selenium.webdriver.common.keys import Keys
 import time
+from django.test import LiveServerTestCase
 
-
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
     '''Тест нового посетителя'''
 
     def setUp(self):
@@ -24,7 +24,7 @@ class NewVisitorTest(unittest.TestCase):
         '''тест: можно начать список и получить его позже'''
         # Пользователь 1 слышал про крутое новое онлайн-приложение со списком
         # неотложных дел. Он решает оценить его домашнюю страницу
-        self.browser.get('http://127.0.0.1:8000/')
+        self.browser.get(self.live_server_url)
 
         # Он видит что заголовок и шапка страницы говорят о списках
         # неотложных дел
