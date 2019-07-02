@@ -6,12 +6,16 @@ from lists.models import Item
 # Create your views here.
 def home_page(requests):
     '''домашняя страница'''
-    if requests.method == 'POST':
-        Item.objects.create(text=requests.POST['item_text'])
-        return redirect('/lists/first_list_on_the_world/')
     return render(requests, 'home.html')
 
 
 def view_list(requests):
+    '''просмотреть список'''
     items = Item.objects.all()
     return render(requests, 'list.html', {'items': items})
+
+
+def new_list(requests):
+    '''новый список'''
+    Item.objects.create(text=requests.POST['item_text'])
+    return redirect('/lists/first_list_on_the_world/')
