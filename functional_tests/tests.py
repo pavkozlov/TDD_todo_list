@@ -118,6 +118,31 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotIn('Купить павлиньи перья', page_text)
         self.assertIn('Купить молоко', page_text)
 
+    def test_layout_and_styling(self):
+        '''тест макета и стилевого оформления'''
+        # Пользователь 1 открыает домашнюю страницу
+        self.browser.get(self.live_server_url)
+        self.browser.set_window_size(1024, 768)
+
+        # Он замечает что поле воода аккуратно центрировано
+        inpuntbox = self.browser.find_element_by_id('id_new_item')
+        self.assertAlmostEqual(
+            inpuntbox.location['x'] + inpuntbox.size['width'] / 2,
+            512,
+            delta=10
+        )
+
+        # Он начинает новый список и видит, что поле ввода там тоже
+        # аккуратно центрировано
+        inpuntbox.send_keys('testing')
+        inpuntbox.send_keys(Keys.ENTER)
+        self.wait_for_row_in_list_table('1: testing')
+        inpuntbox = self.browser.find_element_by_id('id_new_item')
+        self.assertAlmostEqual(
+            inpuntbox.location['x'] + inpuntbox.size['width'] / 2,
+            512,
+            delta=10
+        )
         self.fail('Закончить тест!')
 
 
