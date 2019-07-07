@@ -49,6 +49,11 @@ def _update_settings(source_folder, site_name):
     append(settings_path, '\nfrom .secret_key import SECRET_KEY')
 
 
+
+
+
+
+
 def _update_virtualenv(source_folder):
     '''обновить виртуальную среду'''
     virtualenv_folder = source_folder + '/../virtualenv'
@@ -68,16 +73,8 @@ def _update_database(source_folder):
         f'cd {source_folder} && ../virtualenv/bin/python3 manage.py migrate --noinput'
     )
 
-
-# sudo
-# ln - s.. / sites - available / todo.itpavel.ru / etc / nginx / sites - enabled / todo.itpavel.ru
+# sudo ln -s ../sites-available/todo.itpavel.ru /etc/nginx/sites-enabled/todo.itpavel.ru
 #
-# sed
-# "s/SITENAME/todo.itpavel.ru/g"
-# source / deploy_tools / nginx.template.conf | sudo
-# tee / etc / nginx / sites - available / todo.itpavel.ru
+# sed "s/SITENAME/todo.itpavel.ru/g" source/deploy_tools/nginx.template.conf | sudo tee /etc/nginx/sites-available/todo.itpavel.ru
 #
-# sed
-# "s/SITENAME/todo.itpavel.ru/g"
-# source / deploy_tools / gunicorn - systemd.template.service | sudo
-# tee / etc / systemd / system / gunicorn - todo.itpavel.ru.service
+# sed "s/SITENAME/todo.itpavel.ru/g" source/deploy_tools/gunicorn-systemd.template.service | sudo tee /etc/systemd/system/gunicorn-todo.itpavel.ru.service
